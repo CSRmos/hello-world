@@ -1,0 +1,142 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: item_idcadastro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE item_idcadastro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.item_idcadastro_seq OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: cadastro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cadastro (
+    id integer DEFAULT nextval('item_idcadastro_seq'::regclass) NOT NULL,
+    tipo integer,
+    status integer,
+    locali character varying(200),
+    datai character varying(30),
+    item character varying(200),
+    desci character varying(200),
+    categoria character varying(200),
+    matricula character varying(200)
+);
+
+
+ALTER TABLE public.cadastro OWNER TO postgres;
+
+--
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    nomeu character varying(200) NOT NULL,
+    cursou character varying(100),
+    emailu character varying(200),
+    resposta character varying(200),
+    matriculau character varying(200),
+    senhau character varying(200),
+    telefoneu character varying(200),
+    pergunta character varying(200)
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- Data for Name: cadastro; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cadastro (id, tipo, status, locali, datai, item, desci, categoria, matricula) FROM stdin;
+3	1	1	lab redes	20/05/2016	celular	moto g 3 branco	1	358370
+7	1	1	Lab 01	20/02/2016	Celular	Galaxy S5 cinza	1	358361
+\.
+
+
+--
+-- Name: item_idcadastro_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('item_idcadastro_seq', 7, true);
+
+
+--
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY usuario (nomeu, cursou, emailu, resposta, matriculau, senhau, telefoneu, pergunta) FROM stdin;
+Alisson	Redes	teste@alisson	raimunda	358361	123123	00998877	1
+Cleilson Ramos	Redes de Computadores	teste@tste	358367	358367	425332	3323423	358367
+Juaum	5	teste@teste	cuzcuz com ovo	352138	826283	316498494	2
+\.
+
+
+--
+-- Name: cadastro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cadastro
+    ADD CONSTRAINT cadastro_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- Name: usuario; Type: ACL; Schema: public; Owner: postgres
+--
+
+REVOKE ALL ON TABLE usuario FROM PUBLIC;
+REVOKE ALL ON TABLE usuario FROM postgres;
+GRANT ALL ON TABLE usuario TO postgres;
+GRANT ALL ON TABLE usuario TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
